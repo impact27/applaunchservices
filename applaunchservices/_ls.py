@@ -11,6 +11,7 @@ from LaunchServices import (LSCopyDefaultRoleHandlerForContentType,
                             LSSetDefaultRoleHandlerForContentType,
                             LSCopyDefaultHandlerForURLScheme,
                             LSSetDefaultHandlerForURLScheme,
+                            LSOpenCFURLRef,
                             kLSRolesNone,
                             kLSRolesViewer,
                             kLSRolesEditor,
@@ -49,7 +50,7 @@ def get_bundle_identifier_for_path(path):
     """
     Get bundle identifier for the given path.
     """
-    bundle_url = 'file://' + path
+    bundle_url = 'file://' + os.path.abspath(path)
     return NSBundle.bundleWithURL_(
         NSURL.URLWithString_(bundle_url)).bundleIdentifier()
 
@@ -74,3 +75,14 @@ def set_URL_scheme_handler(url_scheme, bundle_identifier):
 def get_URL_scheme_handler(url_scheme):
     """Get handler for given URL scheme."""
     return LSCopyDefaultHandlerForURLScheme(url_scheme)
+
+
+def open_URL(url):
+    """Open the url with launchservices."""
+    URL = NSURL.URLWithString_(url)
+    LSOpenCFURLRef(URL, None)
+
+
+def open_path(path):
+    """Open the path with launchservices."""
+    open_URL('file://' + os.path.abspath(path))
