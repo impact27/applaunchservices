@@ -26,15 +26,27 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-__version__ = '0.1.5'
+__version__ = '0.1.7'
 
 import sys
 import platform
 from distutils.version import LooseVersion as V
 
-if sys.platform != "darwin" or V(platform.mac_ver()[0]) < V("10.4"):
+try:
+    import LaunchServices
+    import AppKit
+    HAS_APPKIT = True
+except ImportError:
+    HAS_APPKIT = False
+
+
+if (not HAS_APPKIT
+      or sys.platform != "darwin"
+      or V(platform.mac_ver()[0]) < V("10.4")):
     from ._dummy import *
 else:
     from ._ls import *
 
-del sys, platform, V
+if HAS_APPKIT:
+    del LaunchServices, AppKit
+del sys, platform, V, HAS_APPKIT
