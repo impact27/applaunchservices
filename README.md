@@ -1,7 +1,7 @@
 # applaunchservices
 Simple package for registering an app with apple Launch Services to handle UTI and URL
 
-# Usage example:
+## Usage example:
 ```python
 import applaunchservices as als
 from PyQt5.QtWidgets import QApplication, QWidget
