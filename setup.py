@@ -14,7 +14,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="applaunchservices",
-    version="0.1.0",
+    version="0.1.1",
     author="Quentin Peter",
     author_email="qpeter@bluewin.ch",
     description="Simple package for registering an app with apple Launch Services to handle UTI and URL",
@@ -24,8 +24,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 2",
         "License :: OSI Approved :: MIT License",
         "Operating System :: MacOS",
     ],
-    python_requires='>=3.6',
 )
