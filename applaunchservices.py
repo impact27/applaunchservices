@@ -45,24 +45,23 @@ def get_bundle_identifier(pid=None):
     return app.bundleIdentifier()
 
 
-def set_UTI_handler(uniform_type_identifier, bundle_identifier,
-                    role='all'):
+def set_UTI_handler(uniform_type_identifier, role, bundle_identifier):
     """Set handler for given uniform type identifier and role."""
     LSSetDefaultRoleHandlerForContentType(
         uniform_type_identifier, kLSRoles[role], bundle_identifier)
 
 
-def get_UTI_handler(uniform_type_identifier, role='all'):
+def get_UTI_handler(uniform_type_identifier, role):
     """Get handler for given uniform type identifier and role."""
     return LSCopyDefaultRoleHandlerForContentType(
         uniform_type_identifier, kLSRoles[role])
 
 
 def set_URL_scheme_handler(url_scheme, bundle_identifier):
-    """Set handler for given URL scheme and role."""
+    """Set handler for given URL scheme."""
     LSSetDefaultHandlerForURLScheme(url_scheme, bundle_identifier)
 
 
 def get_URL_scheme_handler(url_scheme):
-    """Get handler for given URL scheme and role."""
+    """Get handler for given URL scheme."""
     return LSCopyDefaultHandlerForURLScheme(url_scheme)
