@@ -4,64 +4,40 @@
 Created on Mon Oct 14 23:47:20 2019
 
 @author: quentinpeter
+
+This file is distributed under the following licence:
+
+this project is licensed under 2-clause BSD
+
+Copyright (c) 2013, Min Ragan-Kelley
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-import os
-from LaunchServices import (LSCopyDefaultRoleHandlerForContentType,
-                            LSSetDefaultRoleHandlerForContentType,
-                            LSCopyDefaultHandlerForURLScheme,
-                            LSSetDefaultHandlerForURLScheme,
-                            kLSRolesNone,
-                            kLSRolesViewer,
-                            kLSRolesEditor,
-                            kLSRolesShell,
-                            kLSRolesAll)
+import sys
+import platform
+from distutils.version import LooseVersion as V
 
-from AppKit import NSRunningApplication
+if sys.platform != "darwin" or V(platform.mac_ver()[0]) < V("10.4"):
+    from ._dummy import *
+else:
+    from ._ls import *
 
-
-name = "applaunchservices"
-
-kLSRoles = {
-    'none': kLSRolesNone,
-    'viewer': kLSRolesViewer,
-    'editor': kLSRolesEditor,
-    'shell': kLSRolesShell,
-    'all': kLSRolesAll
-    }
-
-
-def get_bundle_identifier(pid=None):
-    """
-    Get bundle identifier for the given process identifier.
-
-    if pid is None, the current process pid is used.
-    """
-    if pid is None:
-        pid = os.getpid()
-    app = NSRunningApplication.runningApplicationWithProcessIdentifier_(pid)
-    if app is None:
-        return
-    return app.bundleIdentifier()
-
-
-def set_UTI_handler(uniform_type_identifier, role, bundle_identifier):
-    """Set handler for given uniform type identifier and role."""
-    LSSetDefaultRoleHandlerForContentType(
-        uniform_type_identifier, kLSRoles[role], bundle_identifier)
-
-
-def get_UTI_handler(uniform_type_identifier, role):
-    """Get handler for given uniform type identifier and role."""
-    return LSCopyDefaultRoleHandlerForContentType(
-        uniform_type_identifier, kLSRoles[role])
-
-
-def set_URL_scheme_handler(url_scheme, bundle_identifier):
-    """Set handler for given URL scheme."""
-    LSSetDefaultHandlerForURLScheme(url_scheme, bundle_identifier)
-
-
-def get_URL_scheme_handler(url_scheme):
-    """Get handler for given URL scheme."""
-    return LSCopyDefaultHandlerForURLScheme(url_scheme)
+del sys, platform, V
