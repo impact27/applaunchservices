@@ -26,7 +26,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-__version__ = '0.1.8'
+__version__ = '0.2.0'
 
 import sys
 import platform
@@ -35,18 +35,18 @@ from distutils.version import LooseVersion as V
 try:
     import LaunchServices
     import AppKit
-    HAS_APPKIT = True
+    HAS_LS = True
 except ImportError:
-    HAS_APPKIT = False
+    HAS_LS = False
 
 
-if (not HAS_APPKIT
+if (not HAS_LS
       or sys.platform != "darwin"
       or V(platform.mac_ver()[0]) < V("10.4")):
     from ._dummy import *
 else:
     from ._ls import *
 
-if HAS_APPKIT:
+if HAS_LS:
     del LaunchServices, AppKit
-del sys, platform, V, HAS_APPKIT
+del sys, platform, V
