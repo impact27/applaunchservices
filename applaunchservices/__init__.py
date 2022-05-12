@@ -26,14 +26,14 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-__version__ = '0.2.1'
+__version__ = '0.3.0'
 
 import sys
 import platform
 from distutils.version import LooseVersion as V
 
 try:
-    import LaunchServices
+    import CoreServices.LaunchServices
     import AppKit
     HAS_LS = True
 except ImportError:
@@ -48,5 +48,5 @@ else:
     from ._ls import *
 
 if HAS_LS:
-    del LaunchServices, AppKit
+    del CoreServices.LaunchServices, AppKit
 del sys, platform, V

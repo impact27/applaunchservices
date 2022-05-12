@@ -14,7 +14,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="applaunchservices",
-    version="0.2.1",
+    version="0.3.0",
     author="Quentin Peter",
     author_email="qpeter@bluewin.ch",
     description="Simple package for registering an app with apple Launch Services to handle UTI and URL",
@@ -29,7 +29,7 @@ setuptools.setup(
         "Operating System :: MacOS",
     ],
     install_requires=[
-        'pyobjc',
+        'pyobjc-framework-CoreServices',
         ],
     tests_require=[
         'PyQt5',

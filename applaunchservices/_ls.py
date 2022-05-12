@@ -7,7 +7,7 @@ Created on Tue Oct 15 11:15:45 2019
 """
 
 import os
-from LaunchServices import (LSCopyDefaultRoleHandlerForContentType,
+from CoreServices.LaunchServices import (LSCopyDefaultRoleHandlerForContentType,
                             LSSetDefaultRoleHandlerForContentType,
                             LSCopyDefaultHandlerForURLScheme,
                             LSSetDefaultHandlerForURLScheme,
