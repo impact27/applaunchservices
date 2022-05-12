@@ -7,16 +7,17 @@ Created on Tue Oct 15 11:15:45 2019
 """
 
 import os
-from CoreServices.LaunchServices import (LSCopyDefaultRoleHandlerForContentType,
-                            LSSetDefaultRoleHandlerForContentType,
-                            LSCopyDefaultHandlerForURLScheme,
-                            LSSetDefaultHandlerForURLScheme,
-                            LSOpenCFURLRef,
-                            kLSRolesNone,
-                            kLSRolesViewer,
-                            kLSRolesEditor,
-                            kLSRolesShell,
-                            kLSRolesAll)
+from CoreServices.LaunchServices import (
+    LSCopyDefaultRoleHandlerForContentType,
+    LSSetDefaultRoleHandlerForContentType,
+    LSCopyDefaultHandlerForURLScheme,
+    LSSetDefaultHandlerForURLScheme,
+    LSOpenCFURLRef,
+    kLSRolesNone,
+    kLSRolesViewer,
+    kLSRolesEditor,
+    kLSRolesShell,
+    kLSRolesAll)
 
 from AppKit import NSRunningApplication, NSBundle, NSURL
 
