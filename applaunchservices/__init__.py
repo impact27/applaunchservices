@@ -30,7 +30,7 @@ __version__ = '0.3.1'
 
 import sys
 import platform
-from distutils.version import LooseVersion as V
+from looseversion import LooseVersion as V
 
 try:
     import CoreServices.LaunchServices
