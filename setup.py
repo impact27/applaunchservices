@@ -30,6 +30,7 @@ setuptools.setup(
     ],
     install_requires=[
         'pyobjc-framework-CoreServices',
+        'looseversion',
         ],
     tests_require=[
         'PyQt5',
